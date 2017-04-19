@@ -1,10 +1,6 @@
-package com.bookhut.entities;
+package com.bookhut.models.viewModels;
 
-import java.util.Date;
-
-public class Book {
-
-    private long id;
+public class ViewBookModel {
 
     private String title;
 
@@ -12,25 +8,13 @@ public class Book {
 
     private int pages;
 
-    private Date creationDate;
-
-    public Book() {
-        this.creationDate = new Date();
+    public ViewBookModel() {
     }
 
-    public Book(String title, String author, int pages) {
-        this();
+    public ViewBookModel(String title, String author, int pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -55,13 +39,5 @@ public class Book {
 
     public void setPages(int pages) {
         this.pages = pages;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 }
