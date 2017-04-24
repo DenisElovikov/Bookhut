@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Menu</title>
-        <link rel="stylesheet" href="../css/">
+        <link rel="stylesheet" href="../public/css/home.css">
     </head>
     <body>
         <ul>
