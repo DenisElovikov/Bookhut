@@ -2,6 +2,8 @@ package com.bookhut.controllers;
 
 
 import com.bookhut.models.bindingModels.LoginModel;
+import com.bookhut.service.UserService;
+import com.bookhut.serviceImpl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,13 @@ import java.io.IOException;
 
 @WebServlet("/signup")
 public class SignUpController extends HttpServlet {
+
+    private UserService userService;
+
+    public SignUpController() {
+        this.userService = new UserServiceImpl();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/templates/signUp.jsp").forward(req, resp);
@@ -22,7 +31,10 @@ public class SignUpController extends HttpServlet {
         LoginModel loginModel = null;
         String signUpText = req.getParameter("signup");
         if(signUpText != null) {
-            //TODO Implement the logic
+            String username = req.getParameter("username");
+            String password = req.getParameter("password");
+            loginModel = new LoginModel(username,password);
+            this.userService.createUser(loginModel);
             resp.sendRedirect("/signin");
         }
     }
