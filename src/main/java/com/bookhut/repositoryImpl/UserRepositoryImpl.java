@@ -12,7 +12,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private List<User> users;
 
-    public UserRepositoryImpl() {
+    private UserRepositoryImpl() {
         this.users = new ArrayList<>();
     }
 
@@ -25,10 +25,19 @@ public class UserRepositoryImpl implements UserRepository {
     public User findByUsernameAndPassword(final String username, final String password) {
         User user = users
                 .stream()
-                .filter(u -> u.getUsername().equals(username)
-                        && u.getPassword().equals(password))
+                .filter(u ->
+                        u.getUsername().equals(username)
+                                && u.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
         return user;
+    }
+
+    public static UserRepository getInstance(){
+        if(userRepository == null) {
+            userRepository = new UserRepositoryImpl();
+        }
+
+        return userRepository;
     }
 }

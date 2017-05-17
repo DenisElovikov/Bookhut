@@ -1,6 +1,5 @@
 package com.bookhut.controllers;
 
-
 import com.bookhut.models.bindingModels.LoginModel;
 import com.bookhut.service.UserService;
 import com.bookhut.serviceImpl.UserServiceImpl;
@@ -21,21 +20,19 @@ public class SignUpController extends HttpServlet {
         this.userService = new UserServiceImpl();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/templates/signUp.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginModel loginModel = null;
-        String signUpText = req.getParameter("signup");
-        if(signUpText != null) {
-            String username = req.getParameter("username");
-            String password = req.getParameter("password");
+        String signUpText = request.getParameter("signup");
+        if(signUpText != null){
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
             loginModel = new LoginModel(username,password);
             this.userService.createUser(loginModel);
-            resp.sendRedirect("/signin");
+            response.sendRedirect("/signin");
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/templates/signup.jsp").forward(request, response);
     }
 }

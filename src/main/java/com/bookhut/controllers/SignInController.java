@@ -1,6 +1,5 @@
 package com.bookhut.controllers;
 
-
 import com.bookhut.models.bindingModels.LoginModel;
 import com.bookhut.service.UserService;
 import com.bookhut.serviceImpl.UserServiceImpl;
@@ -22,12 +21,6 @@ public class SignInController extends HttpServlet {
         this.userService = new UserServiceImpl();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/templates/signin.jsp").forward(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginModel loginModel = null;
         String signInText = request.getParameter("signin");
@@ -44,5 +37,9 @@ public class SignInController extends HttpServlet {
         } else {
             response.sendRedirect("/signin");
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/templates/signin.jsp").forward(request, response);
     }
 }
